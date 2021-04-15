@@ -367,8 +367,51 @@ public class Picture
   }
 
    ////////////////////// methods ///////////////////////////////////////
-
-   
-
+  public void sepiaTone()
+  {
+  //Create variables to hold RGB values.
+    int r = 0;
+    int g = 0;
+    int b = 0;
+    int newRed = 0;
+    int newGreen = 0;
+    int newBlue = 0;
+    Pixel[][] pixels = this.getPixels2D();
+    for(int row = 0; row < pixels.length; row++)
+    {
+      for(int col = 0; col < pixels[0].length; col++)
+      {
+        //Calculate newRed, newGreen, newBlue using the above formula (Take the integer value)
+        r = pixels[row][col].getRed();
+        g = pixels[row][col].getGreen();
+        b = pixels[row][col].getBlue();
+        newRed = (int)(0.393*r + 0.769*g + 0.189*b);
+        newGreen = (int)(0.349*r + 0.686*g + 0.168*b);
+        newBlue = (int)(0.272*r + 0.534*g + 0.131*b);
+        //Set the new RGB value of the pixel as per the following condition:
+        
+        //If newRed > 255 then R = 255 else R = newRed
+        if(newRed > 255)
+        {
+          newRed = 255;
+        }
+        //If newGreen > 255 then G = 255 else G = newGreen
+        if(newGreen > 255)
+        {
+          newGreen = 255;
+        }
+        //If newBlue > 255 then B = 255 else B = newBlue
+        if(newBlue > 255)
+        {
+          newBlue = 255;
+        }
+        //Replace the value of R, G and B with the new value that we calculated for the pixel.
+        pixels[row][col].setRed(newRed);
+        pixels[row][col].setGreen(newGreen);
+        pixels[row][col].setBlue(newBlue);
+        //Repeat Step 1 to Step 4 for each pixels of the image.
+      }
+    }
+  }
 
 } // this } is the end of class Picture, put all new methods before this
